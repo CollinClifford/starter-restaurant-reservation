@@ -27,16 +27,14 @@ const hasRequiredProperties = hasProperties(
 
 // lists based on mobile_number or date
 async function list(req, res) {
-  // if (req.query.mobile_number) {
-  //   return res.json({
-  //     data: await service.readPhoneNumber(req.query.mobile_number),
-  //   });
-  // }
-  // if (req.query.date) {
-    return res.json({ data: await service.list(
-      // req.query.date
-      ) });
-  // }
+  if (req.query.mobile_number) {
+    return res.json({
+      data: await service.readPhoneNumber(req.query.mobile_number),
+    });
+  }
+  if (req.query.date) {
+    return res.json({ data: await service.list(req.query.date) });
+  }
 }
 
 // lists reservation found by reservation_id
