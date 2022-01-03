@@ -50,14 +50,12 @@ const Reservation = ({ reservation }) => {
               >
                 Seat
               </a>
-              {/* <a href={`reservations/${reservation.reservation_id}/edit`}> */}
               <button
                 className="m-1 btn btn-secondary btn-sm"
                 href={`reservations/${reservation.reservation_id}/edit`}
               >
                 Edit
               </button>
-              {/* </a> */}
             </>
           )}
         </table>
