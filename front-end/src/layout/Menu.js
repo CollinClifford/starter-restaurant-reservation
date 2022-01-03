@@ -11,9 +11,9 @@ import "./menu.css";
 
 function Menu() {
   return (
-    <nav>
+    <nav role="navigation">
       <div>
-        <ul id="accordionSidebar">
+        <ul id="menu">
           <li className="name">
             <Link to={"/dashboard"}>
               <span>Periodic Tables</span>
