@@ -4,12 +4,12 @@ const knex = require("../db/connection");
 function list(reservation_date) {
   return knex("reservations")
     .select("*")
-    .where(function () {
-      this.where({ reservation_date })
-        .andWhere({ status: "booked" })
-        .orWhere({ status: "seated" });
-    })
-    .orderBy("reservation_time");
+    // .where(function () {
+    //   this.where({ reservation_date })
+    //     .andWhere({ status: "booked" })
+    //     .orWhere({ status: "seated" });
+    // })
+    // .orderBy("reservation_time");
 }
 
 // returns reservation matching phone number
