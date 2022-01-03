@@ -4,13 +4,6 @@ dayjs.extend(utc);
 
 // makes sure time being requested is valid
 function hasValidTime(req, res, next) {
-  const currTime = dayjs()
-  // .utc()
-  .local()
-  .format("HH:mm")
-  .toString()
-  .split(":")
-  .join("");
   const today = dayjs();
   const time = req.body.data.reservation_time;
   const date = req.body.data.reservation_date;
@@ -30,7 +23,7 @@ function hasValidTime(req, res, next) {
     if (!notBeforeCurrentTime(time, date)) {
       return next({
         status: 400,
-        message: `${time} is not available.  Reservations must be made after current time. ${currTime}`,
+        message: `${time} is not available.  Reservations must be made after current time.`,
       });
     }
     next();
@@ -57,15 +50,15 @@ function notBeforeCurrentTime(time, date) {
   const importedDate = date.toString().split("-").join("");
 
   const currTime = dayjs()
-  .utc()
-  .local()
-  .format("HH:mm")
-  .toString()
-  .split(":")
-  .join("");
+    .utc()
+    .local()
+    .format("HH:mm")
+    .toString()
+    .split(":")
+    .join("");
 
   const importedTime = time.toString().split(":").join("");
-  console.log(currTime, importedTime)
+  console.log(currTime, importedTime);
 
   if (importedDate === todayDate) {
     if (Number(importedTime) > Number(currTime)) {
