@@ -8,7 +8,7 @@ const router = require("express").Router();
 const controller = require("./reservations.controller");
 const methodNotAllowed = require("../errors/methodNotAllowed");
 
-router.route("/:reservationId/mobile_phone").all(cors());
+router.route("/:reservationId/mobile_phone");
 
 router
   .route("/:reservationId/status")
