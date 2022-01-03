@@ -4,9 +4,12 @@
  */
 import formatReservationDate from "./format-reservation-date";
 import formatReservationTime from "./format-reservation-date";
+const REACT_APP_API_BASE_URL = "https://periotable-be.herokuapp.com";
 
 const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+  // process.env.
+  REACT_APP_API_BASE_URL;
+// || "http://localhost:5000";
 
 /**
  * Defines the default headers for these functions to work with `json-server`
@@ -14,7 +17,7 @@ const API_BASE_URL =
 const headers = new Headers();
 headers.append("Content-Type", "application/json");
 
-headers.append("Access-Control-Allow-Origin", "*")
+headers.append("Access-Control-Allow-Origin", "*");
 
 /**
  * Fetch `json` from the specified URL and handle error status codes and ignore `AbortError`s
