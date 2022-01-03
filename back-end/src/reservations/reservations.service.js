@@ -1,7 +1,9 @@
 const knex = require("../db/connection");
 
 // lists reservations for date by time
-function list(reservation_date) {
+function list(
+  // reservation_date
+  ) {
   return knex("reservations")
     .select("*")
     // .where(function () {
