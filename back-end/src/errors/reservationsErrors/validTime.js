@@ -5,7 +5,7 @@ dayjs.extend(utc);
 // makes sure time being requested is valid
 function hasValidTime(req, res, next) {
   const currTime = dayjs()
-  .utc()
+  // .utc()
   .local()
   .format("HH:mm")
   .toString()
