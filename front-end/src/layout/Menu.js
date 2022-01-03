@@ -12,7 +12,7 @@ import "./menu.css";
 function Menu() {
   return (
     <nav role="navigation">
-      <div>
+      <div className="min">
         <ul id="menu">
           <li className="name">
             <Link to={"/dashboard"}>
