@@ -7,7 +7,7 @@ knex.migrate
   .latest()
   .then((migrations) => {
     console.log("migrations", migrations);
-    app.listen(PORT || 3000, listener);
+    app.listen(process.env.PORT || 3000, listener);
   })
   .catch((error) => {
     console.error(error);
