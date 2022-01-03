@@ -4,6 +4,7 @@ dayjs.extend(utc);
 
 // makes sure time being requested is valid
 function hasValidTime(req, res, next) {
+  console.log("here");
   const today = dayjs();
   const time = req.body.data.reservation_time;
   const date = req.body.data.reservation_date;
@@ -49,14 +50,16 @@ function notBeforeCurrentTime(time, date) {
     .join("");
   const importedDate = date.toString().split("-").join("");
 
-  const currTime = new Date()
-    .toString()
-    .split(" ")[4]
-    .split(":")
-    .slice(0, 2)
-    .join("");
+  const currTime = dayjs()
+  .utc()
+  .local()
+  .format("HH:mm")
+  .toString()
+  .split(":")
+  .join("");
 
   const importedTime = time.toString().split(":").join("");
+  
   if (importedDate === todayDate) {
     if (Number(importedTime) > Number(currTime)) {
       return true;
