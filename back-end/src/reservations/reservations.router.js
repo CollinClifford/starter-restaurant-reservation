@@ -12,7 +12,7 @@ router.route("/:reservationId/mobile_phone");
 
 router
   .route("/:reservationId/status")
-  .put(controller.updateStatus)
+  // .put(controller.updateStatus)
   .all(methodNotAllowed);
 
 router.route("/:reservationId/seat").get(controller.read).all(methodNotAllowed);
