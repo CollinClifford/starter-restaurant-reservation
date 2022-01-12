@@ -33,37 +33,20 @@ function Dashboard() {
   const [date, setDate] = useState(query.get("date") || today());
 
   const history = useHistory();
-  useEffect(loadDashboard, [date]);
-  // loads reservations and tables from API and sets th em
-  // useEffect(() => {
-  // function loadDashboard() {
-  //   const abortController = new AbortController();
-  //   setError(null);
-  //   listReservations({ date }, abortController.signal)
-  //     .then(setReservations)
-  //     .catch(setError);
-  //   return () => abortController.abort();
-  // }
-  // loadDashboard();
-  // }, [date]);
-  function loadDashboard() {
-    const abortController = new AbortController();
-    setError(null);
-    listReservations({ date }, abortController.signal)
-      .then(setReservations)
-      .catch(setError);
-    return () => abortController.abort();
-  }
 
+  // loads reservations and tables from API and sets th em
   useEffect(() => {
-    function loadTables() {
+    function loadDashboard() {
       const abortController = new AbortController();
       setError(null);
+      listReservations({ date }, abortController.signal)
+        .then(setReservations)
+        .catch(setError);
       listTables().then(setTables).catch(setError);
       return () => abortController.abort();
     }
-    loadTables();
-  }, []);
+    loadDashboard();
+  }, [date]);
 
   useEffect(() => {
     history.push(`dashboard?date=${date}`);
@@ -146,7 +129,7 @@ function Dashboard() {
         )}
         <h4>Tables</h4>
         {tables.map((table) => (
-          <Tables table={table} loadDashboard={loadDashboard} />
+          <Tables table={table} />
         ))}
       </main>
     </>

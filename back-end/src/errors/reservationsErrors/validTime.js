@@ -58,7 +58,6 @@ function notBeforeCurrentTime(time, date) {
     .join("");
 
   const importedTime = time.toString().split(":").join("");
-  console.log(currTime, importedTime);
 
   if (importedDate === todayDate) {
     if (Number(importedTime) > Number(currTime)) {

@@ -48,9 +48,10 @@ const EditReservation = () => {
   async function submitHandler(event) {
     event.preventDefault();
     const abortController = new AbortController();
-    if (withinRestraints(splitTime)) {
+    const valid = withinRestraints(splitTime);
+    if (valid) {
       await updateReservation(updatedReservation, abortController.signal);
-      history.push(`/dashboard?date=${updatedReservation.reservation_date}`);
+      history.push(`/dashboard?date=${reservation.reservation_date}`);
       return () => abortController.abort();
     }
   }
@@ -59,7 +60,13 @@ const EditReservation = () => {
   const resDate = dayjs(reservation.reservation_date).format("dddd");
 
   // formats current time
-  const currentTime = dayjs().format("HH:mm").toString().split(":").join("");
+  const currentTime = dayjs()
+  .utc()
+  .local()
+  .format("HH:mm")
+  .toString()
+  .split(":")
+  .join("");
 
   // formats inputted time
   let splitTime;
@@ -101,7 +108,7 @@ const EditReservation = () => {
       <EditReservationHeader />
       <ErrorAlert error={errors} />
       <div className="row formStyle">
-        <form onSubmit={submitHandler}>
+        <form onSubmit={() => submitHandler}>
           <label htmlFor="name">Name</label>
 
           <div className="row">
@@ -205,7 +212,7 @@ const EditReservation = () => {
                 cancel
               </button>
               <button className="btn btn-info m-1" type="submit">
-                Submit
+                submit
               </button>
             </div>
           </div>

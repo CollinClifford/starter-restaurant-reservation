@@ -57,9 +57,9 @@ async function updateStatus(req, res, next) {
   res.status(200).json({ data });
 }
 
+// updates reservation in the database
 async function update(req, res) {
   const { reservation_id } = res.locals.reservation;
-
   const updatedReservation = {
     ...req.body.data,
     reservation_id,
@@ -91,11 +91,11 @@ module.exports = {
   ],
   update: [
     asyncErrorBoundary(reservationExists),
-    hasOnlyValidProperties,
-    hasRequiredProperties,
-    hasValidDate,
-    hasValidTime,
-    peopleInteger,
+    hasOnlyValidProperties, // makes sure that the properties listed match those that are in the DB
+    hasRequiredProperties, // makes sure that it has ALL properties
+    hasValidDate, // makes sure that date is not before today or on a Tuesday
+    hasValidTime, // makes sure the date is before current time and within business hours
+    peopleInteger, // makes sure people is a number
     asyncErrorBoundary(update),
   ],
 };

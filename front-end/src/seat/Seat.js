@@ -26,38 +26,27 @@ const Seat = () => {
   useEffect(() => {
     function loadDashboard() {
       const abortController = new AbortController();
-      readReservation(reservationId).then(setReservation);
-      return () => abortController.abort();
-    }
-    loadDashboard();
-  }, [reservationId]);
-
-  useEffect(() => {
-    function loadDashboard() {
-      setError(null);
-      const abortController = new AbortController();
+      readReservation(reservationId).then(setReservation).catch(setError);
       listTables(abortController.signal).then(setTables).catch(setError);
       return () => abortController.abort();
     }
     loadDashboard();
-  }, []);
+  }, [reservationId]);
 
   const changeHandler = (event) => {
     setSelectValue({ [event.target.name]: event.target.value });
   };
 
   const submitHandler = (event) => {
-    const abortController = new AbortController();
     event.preventDefault();
-
+    const abortController = new AbortController();
     updateTable(
       Number(selectValue.table_id),
-      reservationId,
+      Number(reservationId),
       abortController.signal
     )
       .then(() => history.push("/dashboard"))
       .catch(setError);
-
     return () => abortController.abort();
   };
 

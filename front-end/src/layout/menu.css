@@ -55,7 +55,7 @@ li a:hover {
   }
   li a:hover {
     text-decoration: none;
-    color: #968c73;
+    /* color: #968c73; */
   }
 
   .active {

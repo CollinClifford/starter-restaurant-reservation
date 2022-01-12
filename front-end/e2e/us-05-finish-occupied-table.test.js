@@ -40,11 +40,7 @@ describe("US-05 - Finish an occupied table - E2E", () => {
         reservation_time: "13:45",
         people: 4,
       });
-      // console.log(
-      //   "Inside beforeEach test",
-      //   reservation.reservation_id,
-      //   reservation.first_name
-      // );
+
       table = await createTable({
         table_name: `#${Date.now().toString(10)}`,
         capacity: 99,
@@ -52,17 +48,16 @@ describe("US-05 - Finish an occupied table - E2E", () => {
       });
 
       page = await browser.newPage();
-      
+
       page.on("console", onPageConsole);
       await page.setViewport({ width: 1920, height: 1080 });
       await page.goto(`${baseURL}/dashboard?date=2035-01-01`, {
         waitUntil: "networkidle0",
       });
+
       await page.reload({ waitUntil: "networkidle0" });
-      console.log("page inside beforeEach", page)
     });
-  
-    console.log("page is:",page);
+
     test("clicking finish button and then clicking OK makes that table available", async () => {
       await page.screenshot({
         path: ".screenshots/us-05-dashboard-finish-button-before.png",
@@ -78,6 +73,7 @@ describe("US-05 - Finish an occupied table - E2E", () => {
       expect(containsOccupied).toBe(true);
 
       const finishButtonSelector = `[data-table-id-finish="${table.table_id}"]`;
+
       await page.waitForSelector(finishButtonSelector);
 
       page.on("dialog", async (dialog) => {

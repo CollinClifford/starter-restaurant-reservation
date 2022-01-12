@@ -7,6 +7,7 @@ import { cancelReservation } from "../utils/api";
 const Reservation = ({ reservation }) => {
   const history = useHistory();
 
+  // cancelReservation handler
   async function cancelHandler(reservation) {
     const abortController = new AbortController();
     if (
@@ -16,10 +17,11 @@ const Reservation = ({ reservation }) => {
     ) {
       reservation.status = "cancelled";
       await cancelReservation(reservation, abortController.signal);
-      history.push(`/dashboard?date=${reservation.reservation_date}`);
+      history.push(`/reservations?date=${reservation.reservation_date}`);
       return () => abortController.abort();
     }
   }
+
   return (
     <>
       <div className="res">
@@ -50,12 +52,17 @@ const Reservation = ({ reservation }) => {
               >
                 Seat
               </a>
-              <button
+              <a
                 className="m-1 btn btn-secondary btn-sm"
-                onClick={() => history.push(`reservations/${reservation.reservation_id}/edit`)}
+                href={`/reservations/${reservation.reservation_id}/edit`}
+                // onClick={() =>
+                //   history.push(
+
+                //   )
+                // }
               >
                 Edit
-              </button>
+              </a>
             </>
           )}
         </table>

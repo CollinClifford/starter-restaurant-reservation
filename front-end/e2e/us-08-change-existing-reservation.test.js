@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const { setDefaultOptions } = require('expect-puppeteer');
+const { setDefaultOptions } = require("expect-puppeteer");
 const fs = require("fs");
 const fsPromises = fs.promises;
 
@@ -58,11 +58,11 @@ describe("US-08 - Change an existing reservation - E2E", () => {
         });
 
         const hrefSelector = `[href="/reservations/${reservation.reservation_id}/edit"]`;
+
         await page.waitForSelector(hrefSelector);
 
         await page.screenshot({
-          path:
-            ".screenshots/us-08-dashboard-edit-click-after-no-change-expected.png",
+          path: ".screenshots/us-08-dashboard-edit-click-after-no-change-expected.png",
           fullPage: true,
         });
 
@@ -98,7 +98,6 @@ describe("US-08 - Change an existing reservation - E2E", () => {
         await page.waitForResponse((response) => {
           return response.url().includes("/reservations?date=");
         });
-
         await page.waitForTimeout(500);
 
         expect(await page.$(cancelButtonSelector)).toBeNull();
@@ -190,19 +189,20 @@ describe("US-08 - Change an existing reservation - E2E", () => {
         path: ".screenshots/us-08-edit-reservation-submit-before.png",
         fullPage: true,
       });
-
+// This is where it's timing out ->
       await Promise.all([
         submitButton.click(),
         page.waitForNavigation({ waitUntil: "networkidle0" }),
       ]);
 
-      expect(page.url()).toContain("/dashboard");
 
+      expect(page.url()).toContain("/dashboard");
+    
       await page.screenshot({
         path: ".screenshots/us-08-edit-reservation-submit-after.png",
         fullPage: true,
       });
-
+     
       await expect(page).toMatch(/John/);
     });
   });

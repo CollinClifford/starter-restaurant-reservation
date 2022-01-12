@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { unseatTable } from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
+
 import { useHistory } from "react-router-dom";
 
 const Tables = ({ table }) => {
-  const [error, setError] = useState(null);
   const history = useHistory();
 
   let occupied = table.reservation_id;
 
+  // finish table clickHandler
   async function clickHandler(tableId) {
     if (
       window.confirm(
-        "Is this table ready to seat new guests?  This cannot be undone."
+        "Is this table ready to seat new guests? This cannot be undone."
       )
     ) {
       await unseatTable(tableId);
-      history.go();
+      history.go("/");
     }
   }
 
@@ -29,6 +29,7 @@ const Tables = ({ table }) => {
           {(!occupied && (
             <tbody data-table-id-status={table.table_id}>Free</tbody>
           )) || <tbody data-table-id-status={table.table_id}>Occupied</tbody>}
+
           {occupied && (
             <button
               className="m-1 btn btn-info"

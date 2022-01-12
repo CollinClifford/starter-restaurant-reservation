@@ -5,15 +5,14 @@
 import formatReservationDate from "./format-reservation-date";
 import formatReservationTime from "./format-reservation-date";
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
 
 /**
  * Defines the default headers for these functions to work with `json-server`
  */
 const headers = new Headers();
 headers.append("Content-Type", "application/json");
-
-// headers.append("Access-Control-Allow-Origin", "*");
 
 /**
  * Fetch `json` from the specified URL and handle error status codes and ignore `AbortError`s
@@ -90,7 +89,7 @@ export async function readReservation(reservationId, signal) {
 
 // This is a function to list all tables
 export async function listTables(signal) {
-  const url = new URL(`${API_BASE_URL}/tables/`);
+  const url = new URL(`${API_BASE_URL}/tables`);
   return await fetchJson(url, { headers, signal }, []);
 }
 
@@ -130,7 +129,7 @@ export async function createTable(table, signal) {
 // This is a function to update an exisiting table
 export async function updateTable(tableId, reservationId, signal) {
   const url = `${API_BASE_URL}/tables/${tableId}/seat`;
-  reservationId = Number(reservationId);
+  // reservationId = Number(reservationId);
   const options = {
     method: "PUT",
     headers,
@@ -140,6 +139,7 @@ export async function updateTable(tableId, reservationId, signal) {
   return await fetchJson(url, options);
 }
 
+// this function deletes the reservation_id from the table db
 export async function unseatTable(tableId) {
   const url = `${API_BASE_URL}/tables/${tableId}/seat`;
   const options = {
@@ -148,6 +148,7 @@ export async function unseatTable(tableId) {
   return await fetchJson(url, options);
 }
 
+// sets reservation status to cancelled
 export async function cancelReservation(reservation, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation.reservation_id}/status`;
   const options = {
@@ -161,6 +162,7 @@ export async function cancelReservation(reservation, signal) {
   return await fetchJson(url, options);
 }
 
+// updates reservation!
 export async function updateReservation(reservation, signal) {
   const url = `${API_BASE_URL}/reservations/${reservation.reservation_id}`;
   reservation.people = Number(reservation.people);
