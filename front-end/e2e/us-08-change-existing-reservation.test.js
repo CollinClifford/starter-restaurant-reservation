@@ -189,20 +189,19 @@ describe("US-08 - Change an existing reservation - E2E", () => {
         path: ".screenshots/us-08-edit-reservation-submit-before.png",
         fullPage: true,
       });
-// This is where it's timing out ->
+
       await Promise.all([
         submitButton.click(),
         page.waitForNavigation({ waitUntil: "networkidle0" }),
       ]);
 
-
       expect(page.url()).toContain("/dashboard");
-    
+
       await page.screenshot({
         path: ".screenshots/us-08-edit-reservation-submit-after.png",
         fullPage: true,
       });
-     
+
       await expect(page).toMatch(/John/);
     });
   });

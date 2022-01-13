@@ -32,7 +32,7 @@ function hasValidTime(req, res, next) {
 
 // makes sure time is within business hours
 function withinOperatingHours(time) {
-  const importedTime = time.toString().split(":").join("");
+  const importedTime = Number(time.toString().split(":").slice(0, 2).join(""));
   if (Number(importedTime) > 1029 && Number(importedTime) < 2131) {
     return true;
   }
@@ -47,6 +47,7 @@ function notBeforeCurrentTime(time, date) {
     .toString()
     .split(":")
     .join("");
+
   const importedDate = date.toString().split("-").join("");
 
   const currTime = dayjs()
@@ -57,7 +58,7 @@ function notBeforeCurrentTime(time, date) {
     .split(":")
     .join("");
 
-  const importedTime = time.toString().split(":").join("");
+  const importedTime = Number(time.toString().split(":").slice(0, 2).join(""));
 
   if (importedDate === todayDate) {
     if (Number(importedTime) > Number(currTime)) {
