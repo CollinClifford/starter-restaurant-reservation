@@ -55,11 +55,6 @@ const Reservation = ({ reservation }) => {
               <a
                 className="m-1 btn btn-secondary btn-sm"
                 href={`/reservations/${reservation.reservation_id}/edit`}
-                // onClick={() =>
-                //   history.push(
-
-                //   )
-                // }
               >
                 Edit
               </a>

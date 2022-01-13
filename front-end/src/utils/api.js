@@ -129,7 +129,6 @@ export async function createTable(table, signal) {
 // This is a function to update an exisiting table
 export async function updateTable(tableId, reservationId, signal) {
   const url = `${API_BASE_URL}/tables/${tableId}/seat`;
-  // reservationId = Number(reservationId);
   const options = {
     method: "PUT",
     headers,
