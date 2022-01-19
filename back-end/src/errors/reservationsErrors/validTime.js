@@ -4,7 +4,6 @@ dayjs.extend(utc);
 
 // makes sure time being requested is valid
 function hasValidTime(req, res, next) {
-  const today = dayjs();
   const time = req.body.data.reservation_time;
   const date = req.body.data.reservation_date;
   if (time) {

@@ -9,7 +9,6 @@ const hasValidDate = require("../errors/reservationsErrors/validDate");
 const hasValidTime = require("../errors/reservationsErrors/validTime");
 const reservationExists = require("../errors/reservationsErrors/reservationExists");
 const peopleInteger = require("../errors/reservationsErrors/peopleInteger");
-const statusIsBooked = require("../errors/reservationsErrors/statusIsBooked");
 const statusUnknown = require("../errors/reservationsErrors/statusUnknown");
 const statusIsFinished = require("../errors/reservationsErrors/statusIsFinished");
 const statusReport = require("../errors/reservationsErrors/statusReport");
