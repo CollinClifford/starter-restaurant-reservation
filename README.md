@@ -45,4 +45,8 @@ Where users can find reservations that have been submitted, whether they are boo
 - Run cp ./front-end/.env.sample ./front-end/.env.
 - You should not need to make changes to the ./front-end/.env file unless you want to connect to a backend at a location other than http://localhost:5000.
 - Run npm install to install project dependencies.
+<<<<<<< HEAD
 - Run npm run start:dev to start your server in development mode.
+=======
+- Run npm run start:dev to start your server in development mode.
+>>>>>>> a76a9808cacccfccfdb28ad0ee1740ee2208cc39
