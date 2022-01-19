@@ -46,7 +46,7 @@ const Search = () => {
               name="mobile_number"
               id="mobile_number"
               type="text"
-              value={mobileNumber}
+              value={mobileNumber ? mobileNumber : undefined}
               placeholder="Enter a phone number"
               onChange={changeHandler}
               className="m-4"
@@ -60,7 +60,7 @@ const Search = () => {
       <div className="">
         {click &&
           reservations.map((reservation) => (
-            <Reservation reservation={reservation} />
+            <Reservation reservation={reservation} key={reservation.reservation_id} />
           ))}
         {reservations.length === 0 && (
           <h4 className="alert alert-danger">No reservations found.</h4>

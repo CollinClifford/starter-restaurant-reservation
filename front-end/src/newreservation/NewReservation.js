@@ -88,7 +88,7 @@ const NewReservation = () => {
     }
     return true;
   }
-console.log(reservation.reservation_date)
+
   return (
     <>
       <NewReservationHeader />

@@ -4,7 +4,7 @@ import "./Dashboard.css";
 
 import { cancelReservation } from "../utils/api";
 
-const Reservation = ({ reservation }) => {
+const Reservation = ({ reservation, resId }) => {
   const history = useHistory();
 
   // cancelReservation handler
@@ -24,44 +24,40 @@ const Reservation = ({ reservation }) => {
 
   return (
     <>
-      <div className="res">
-        <table>
-          <tbody>{reservation.people} people for</tbody>
-          <tbody>
-            <em>
-              {reservation.first_name} {reservation.last_name}
-            </em>
-          </tbody>
-          <tbody>at {reservation.reservation_time}</tbody>
-          <tbody> Contact number: {reservation.mobile_number} </tbody>
-          <tbody data-reservation-id-status={reservation.reservation_id}>
-            Status: {reservation.status}
-          </tbody>
-          {reservation.status === "booked" && (
-            <>
-              <button
-                className="m-1 btn btn-danger btn-sm"
-                onClick={() => cancelHandler(reservation)}
-                data-reservation-id-cancel={reservation.reservation_id}
-              >
-                Cancel
-              </button>
-              <a
-                className="m-1 btn btn-info btn-sm"
-                href={`/reservations/${reservation.reservation_id}/seat`}
-              >
-                Seat
-              </a>
-              <a
-                className="m-1 btn btn-secondary btn-sm"
-                href={`/reservations/${reservation.reservation_id}/edit`}
-              >
-                Edit
-              </a>
-            </>
-          )}
-        </table>
-      </div>
+      <ul className="res" key={reservation.reservation_id}>
+        <li>{reservation.people} people for</li>
+        <li>
+          {reservation.first_name} {reservation.last_name}
+        </li>
+        <li>at {reservation.reservation_time}</li>
+        <li> Contact number: {reservation.mobile_number} </li>
+        <li data-reservation-id-status={reservation.reservation_id}>
+          Status: {reservation.status}
+        </li>
+        {reservation.status === "booked" && (
+          <>
+            <button
+              className="m-1 btn btn-danger btn-sm"
+              onClick={() => cancelHandler(reservation)}
+              data-reservation-id-cancel={reservation.reservation_id}
+            >
+              Cancel
+            </button>
+            <a
+              className="m-1 btn btn-info btn-sm"
+              href={`/reservations/${reservation.reservation_id}/seat`}
+            >
+              Seat
+            </a>
+            <a
+              className="m-1 btn btn-secondary btn-sm"
+              href={`/reservations/${reservation.reservation_id}/edit`}
+            >
+              Edit
+            </a>
+          </>
+        )}
+      </ul>
     </>
   );
 };

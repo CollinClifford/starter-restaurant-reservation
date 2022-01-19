@@ -60,7 +60,7 @@ const Seat = () => {
         </h4>
         <p>party of {reservation.people}</p>
         <form onSubmit={submitHandler}>
-          <label for="tables">Available Tables - Capacity</label>
+          <label htmlFor="tables">Available Tables - Capacity</label>
           <br />
           {tables && (
             <div className="form-group">
