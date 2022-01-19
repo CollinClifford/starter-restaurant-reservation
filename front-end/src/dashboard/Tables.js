@@ -12,7 +12,7 @@ const Tables = ({ table }) => {
   async function clickHandler(tableId) {
     if (
       window.confirm(
-        "Is this ul ready to seat new guests? This cannot be undone."
+        "Is this table ready to seat new guests? This cannot be undone."
       )
     ) {
       await unseatTable(tableId);
@@ -25,15 +25,15 @@ const Tables = ({ table }) => {
         <ul className="res" key={table.table_id}>
           <li>{table.table_name}</li>
           <li>Capacity: {table.capacity}</li>
-          {(!occupied && <li data-ul-id-status={table.table_id}>Free</li>) || (
-            <li data-ul-id-status={table.table_id}>Occupied</li>
+          {(!occupied && <li data-table-id-status={table.table_id}>Free</li>) || (
+            <li data-table-id-status={table.table_id}>Occupied</li>
           )}
 
           {occupied && (
             <button
               className="m-1 btn btn-info"
               onClick={() => clickHandler(table.table_id)}
-              data-ul-id-finish={table.table_id}
+              data-table-id-finish={table.table_id}
             >
               Finish
             </button>

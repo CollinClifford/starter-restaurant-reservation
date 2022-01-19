@@ -22,7 +22,6 @@ const hasRequiredProperties = hasProperties(
   "reservation_date",
   "reservation_time",
   "people"
-  // "status" // This seems to throw off a test.
 );
 
 // lists based on mobile_number or date

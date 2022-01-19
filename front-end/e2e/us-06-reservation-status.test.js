@@ -5,6 +5,7 @@ const fsPromises = fs.promises;
 
 const { containsText } = require("./utils");
 const { createReservation, createTable, seatReservation } = require("./api");
+const { Console } = require("console");
 
 const baseURL = process.env.BASE_URL || "http://localhost:3000";
 
